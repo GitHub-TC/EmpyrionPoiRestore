@@ -1,5 +1,4 @@
-﻿using Eleon.Modding;
-using EmpyrionNetAPIDefinitions;
+﻿using EmpyrionNetAPIDefinitions;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using System.Collections.Concurrent;
