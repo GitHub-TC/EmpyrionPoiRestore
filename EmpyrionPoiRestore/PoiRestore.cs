@@ -55,7 +55,7 @@ namespace EmpyrionPoiRestore
                 var playfields = (await Request_Playfield_List()).playfields;
                 GlobalStructureList GSL = null;
 
-                playfields
+                playfields?
                     .Where(P => Configuration.Current.PoiData.ContainsKey(P))
                     .ToList()
                     .ForEach(async P => {
