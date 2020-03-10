@@ -9,6 +9,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using EmpyrionNetAPITools.Extensions;
 using System.Numerics;
+using System.Collections.Concurrent;
 
 namespace EmpyrionPoiRestore
 {
@@ -145,6 +146,16 @@ namespace EmpyrionPoiRestore
         {
             ConfigurationManager<Configuration>.Log = Log;
             Configuration = new ConfigurationManager<Configuration>() { ConfigFilename = Path.Combine(EmpyrionConfiguration.SaveGameModPath, "Configuration.json") };
+            Configuration.CreateDefaults = C => {
+                C.PoiData = new ConcurrentDictionary<string, List<PoiData>>()
+                {
+                    ["Playfieldname"] = new List<PoiData>() {
+                    new PoiData() {
+                        Name = "PoiName",
+                        Positions = new List<PoiPosition>(){ new PoiPosition() { Pos = new Vector3(0,0,0), Rot = new Vector3(0,0,0)} }
+                    }}
+                };
+            };
 
             Configuration.Load();
             Configuration.Save();

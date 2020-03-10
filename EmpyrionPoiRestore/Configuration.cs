@@ -24,9 +24,6 @@ namespace EmpyrionPoiRestore
         public string ChatCommandPrefix { get; set; } = "/\\";
         public int CheckPoiPositionsEveryNSeconds { get; set; } = 60;
         public int CheckPoiPositionsNSecondsAfterPlayfieldLoaded { get; set; } = 10;
-        public ConcurrentDictionary<string, List<PoiData>> PoiData { get; set; } = new ConcurrentDictionary<string, List<PoiData>>()
-        {
-            ["Playfieldname"] = new List<PoiData>() { new PoiData() { Name = "PoiName" } }
-        };
+        public ConcurrentDictionary<string, List<PoiData>> PoiData { get; set; } = new ConcurrentDictionary<string, List<PoiData>>();
     }
 }
