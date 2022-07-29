@@ -59,7 +59,7 @@ namespace EmpyrionPoiRestore
                     .Where(P => Configuration.Current.PoiData.ContainsKey(P))
                     .ToList()
                     .ForEach(async P => {
-                        CheckPoiPositions(P, GSL ?? (GSL = await Request_GlobalStructure_List()));
+                        CheckPoiPositions(P, GSL ?? (GSL = await Request_GlobalStructure_List(Timeouts.Wait1m)));
                     });
             }
             catch (Exception error)
@@ -72,7 +72,7 @@ namespace EmpyrionPoiRestore
         {
             var P = await Request_Player_Info(playerId.ToId());
 
-            if (!(await Request_GlobalStructure_List()).globalStructures.TryGetValue(P.playfield, out var gsi)) return;
+            if (!(await Request_GlobalStructure_List(Timeouts.Wait1m)).globalStructures.TryGetValue(P.playfield, out var gsi)) return;
 
             var poiList = Configuration.Current.PoiData.AddOrUpdate(P.playfield, N => new List<PoiData>(), (N, S) => S);
             var data = poiList.FirstOrDefault(L => L.Name == args["Name"]);
